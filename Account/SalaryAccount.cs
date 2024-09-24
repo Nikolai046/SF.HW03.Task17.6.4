@@ -7,12 +7,4 @@ public class SalaryAccount : Account
     {
         Type = "Зарплатный";
     }
-
-    /// <summary>
-    /// Рассчитывает проценты для зарплатного счета на основе текущего баланса.
-    /// </summary>
-    public override void CalculateInterest()
-    {
-        Interest = Balance * 0.5;
-    }
 }

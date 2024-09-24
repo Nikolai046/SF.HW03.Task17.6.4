@@ -19,7 +19,10 @@ public abstract class Account
     public double Interest { get; protected set; }
 
     /// <summary>
-    /// Абстрактный метод для расчета процентов.
+    /// Метод для расчета процентов.
     /// </summary>
-    public abstract void CalculateInterest();
+    public void CalculateInterest(IInterestStrategy strategy)
+    {
+        Interest = strategy.CalculateInterest(Balance);
+    }
 }

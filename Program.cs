@@ -2,15 +2,17 @@
 {
     public static void Main(string[] args)
     {
-        IInterestCalculator calculator = new InterestCalculator();
+        IAccountFactory accountFactory = new AccountFactory();
+        IInterestStrategy regularStrategy = new RegularAccountInterestStrategy();
+        IInterestStrategy salaryStrategy = new SalaryAccountInterestStrategy();
 
-        Account regularAccount = new RegularAccount { Balance = 500 };
-        Account regularAccountHighBalance = new RegularAccount { Balance = 2000 };
-        Account salaryAccount = new SalaryAccount { Balance = 1000 };
+        var regularAccount = accountFactory.CreateAccount("regular", 500);
+        var regularAccountHighBalance = accountFactory.CreateAccount("regular", 2000);
+        var salaryAccount = accountFactory.CreateAccount("salary", 1000);
 
-        calculator.CalculateInterest(regularAccount);
-        calculator.CalculateInterest(regularAccountHighBalance);
-        calculator.CalculateInterest(salaryAccount);
+        regularAccount.CalculateInterest(regularStrategy);
+        regularAccountHighBalance.CalculateInterest(regularStrategy);
+        salaryAccount.CalculateInterest(salaryStrategy);
 
         Console.WriteLine($"Обычный счет (баланс 500): Проценты = {regularAccount.Interest}");
         Console.WriteLine($"Обычный счет (баланс 2000): Проценты = {regularAccountHighBalance.Interest}");
